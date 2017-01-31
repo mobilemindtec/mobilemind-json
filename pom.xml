@@ -1,0 +1,135 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.com.mobilemind.api</groupId>
+    <artifactId>mobilemind-json</artifactId>
+    <version>1.1</version>
+    <packaging>jar</packaging>
+
+    <name>Mobile Mind - JSON</name>
+    <url>http://www.mobilemind.com.br</url>
+	
+    <distributionManagement>
+        <repository>
+            <id>mobile-mind</id>
+            <name>Mobile Mind Nexus</name>
+            <url>http://nexus.mobilemind.com.br/nexus/content/repositories/mobile-mind</url>
+        </repository>
+    </distributionManagement>
+
+    <!-- download artifacts from this repo -->
+    <repositories>
+        <repository>
+            <id>mobile-mind</id>
+            <name>vineetmanohar</name>
+            <url>http://nexus.mobilemind.com.br/nexus/content/repositories/mobile-mind</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- download plugins from this repo -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mobile-mind</id>
+            <name>vineetmanohar</name>
+            <url>http://www.mobilemind.com.br/nexus/content/repositories/mobile-mind</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    
+    <profiles>
+        <profile>
+            <id>portal-war</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>enableCiProfile</name>
+                    <value>true</value>
+                </property>
+            </activation> 
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.7</version>
+                        <executions>
+                            <execution>
+                                <id>exec-one</id>
+                                <phase>install</phase>
+                                <goals>
+                                    
+                                    <goal>deploy</goal>
+                                    
+                                </goals>                        
+                            </execution>                    
+                        </executions>
+                    </plugin>    
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <configuration>
+                            <licenseName>gpl_v2</licenseName>
+                            <organizationName>Mobile Mind Empresa de Tecnologia</organizationName>
+                            <inceptionYear>2012</inceptionYear>
+                            <verbose>true</verbose>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>first</id>
+                                <goals>
+                                    <goal>update-file-header</goal>
+                                </goals>
+                                <phase>process-sources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>              
+                </plugins>                        
+            </build>
+        </profile>
+    </profiles>
+	
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>br.com.mobilemind.api</groupId>
+            <artifactId>mobilemind-utils</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
